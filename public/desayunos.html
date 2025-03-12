@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Birthstone&family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <title>Delisopas</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title">DeliSopas</h1>
+    </header>
+    <main>
+      <div class="pedidos">
+        <h1>Tomar Pedido</h1>
+        <label>Mesa:</label>
+        <select id="mesa">
+          <option value="1">Mesa 1</option>
+          <option value="2">Mesa 2</option>
+          <option value="3">Mesa 3</option>
+          <option value="4">Mesa 4</option>
+          <option value="5">Mesa 5</option>
+          <option value="6">Mesa 6</option>
+          <option value="7">Mesa 7</option>
+          <option value="8">Mesa 8</option>
+          <option value="9">Mesa 9</option>
+          <option value="10">Mesa 10</option>
+        </select>
+
+        <h2>Seleccionar Desayunos</h2>
+        <section class="buttons">
+          <button onclick="agregarDesayuno('Combo-1', 14000)">
+            Combo 1 - 14.000
+          </button>
+          <button onclick="agregarDesayuno('Combo-2', 14000)">
+            Combo 2 - 10.000
+          </button>
+          <button onclick="agregarDesayuno('Combo-3', 14000)">
+            Combo 3 - 8.500
+          </button>
+          <button onclick="agregarDesayuno('Combo-4', 14000)">
+            Combo 4 - 11.500
+          </button>
+        </section>
+
+        <h3>Pedido:</h3>
+        <ul id="lista-pedido"></ul>
+
+        <form class="formulario-desayunos" id="form-pedidos">
+          <div class="input-radio">
+            <label for="">changua</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Caldo</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Chocolate y Pan</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Huevos Arroz</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Huevos al Gusto</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Tamal Especial</label>
+            <input type="number" />
+          </div>
+          <h3>Bebidas:</h3>
+
+          <div class="input-radio">
+            <label for="">cafe</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Chocolate</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Perico</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Jugo Hit</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Jugo Hit Grande</label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Jugo natural agua </label>
+            <input type="number" />
+          </div>
+          <div class="input-radio">
+            <label for="">Jugo Natural Leche</label>
+            <input type="number" />
+          </div>
+        </form>
+
+        <dialog class="modal-desayunos" id="modalDesayunos">
+          <img
+            id="close-icon2"
+            class="close"
+            src="../imgs/remove.png"
+            alt="closedesayunos"
+          />
+          <h4>especificaciones</h4>
+          <textarea class="area-desayunos" name="" id=""></textarea>
+
+          <button class="enviarPedido" id="enviarPedido">Enviar Pedido</button>
+        </dialog>
+
+        <button class="enviarPedido" id="enviar-desatuno">Enviar Pedido</button>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./scripts/desayunos.js"></script>
+      </div>
+    </main>
+  </body>
+</html>

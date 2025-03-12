@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Birthstone&family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <title>Delisopas</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title">DeliSopas</h1>
+    </header>
+    <main>
+      <div class="pedidos">
+        <h1>Tomar Pedido</h1>
+        <label>Mesa:</label>
+        <select id="mesa">
+          <option value="1">Mesa 1</option>
+          <option value="2">Mesa 2</option>
+          <option value="3">Mesa 3</option>
+          <option value="4">Mesa 4</option>
+          <option value="5">Mesa 5</option>
+          <option value="6">Mesa 6</option>
+          <option value="7">Mesa 7</option>
+          <option value="8">Mesa 8</option>
+          <option value="9">Mesa 9</option>
+          <option value="10">Mesa 10</option>
+        </select>
+
+        <h2>Seleccionar Almuerzos</h2>
+        <section class="buttons">
+          <button onclick="agregarAlmuerzo('Almuerzo Corriente', 10)">
+            Almuerzo Corriente - €10
+          </button>
+          <button onclick="agregarAlmuerzo('Ejecutivo Varios ', 15)">
+            Ejecutivo Varios- €15
+          </button>
+          <button onclick="agregarAlmuerzo('Ejecutivo Sopa Especial', 15)">
+            Ejecutivo Sopa Especial
+          </button>
+          <button onclick="agregarAlmuerzo('Ejecutivo Churrasco', 15)">
+            Ejecutivo Churrasco
+          </button>
+          <button onclick="agregarAlmuerzo('Sopa Pequena', 15)">
+            Sopa Pequena
+          </button>
+          <button onclick="agregarAlmuerzo('Sopa Grande', 15)">
+            Sopa Grande
+          </button>
+        </section>
+
+        <dialog class="modal-almuerzo" id="modal">
+          <form class="formulario" id="form-pedidos">
+            <img
+              id="close-icon"
+              class="close"
+              src="../imgs/remove.png"
+              alt="close"
+            />
+            <label for="">Sopa</label>
+            <input type="text" placeholder="Sopa" />
+            <label for="">Principio</label>
+            <input type="text" placeholder="Principio" />
+            <label for="">Proteina</label>
+            <input type="text" placeholder="Proteina" />
+            <label for="">Jugo</label>
+            <input type="text" placeholder="Jugo" />
+            <label for="">Ensalada</label>
+            <input type="text" placeholder="Ensalada" />
+          </form>
+
+          <div class="observaciones">
+            <label for="">Observaciones!</label>
+            <textarea name="observaciones" id="observaciones"></textarea>
+          </div>
+
+          <button class="enviarPedido" id="enviarPedido">Enviar Pedido</button>
+        </dialog>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./scripts/almuerzo.js"></script>
+      </div>
+    </main>
+  </body>
+</html>
