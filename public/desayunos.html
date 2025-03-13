@@ -39,13 +39,13 @@
           <button onclick="agregarDesayuno('Combo-1', 14000)">
             Combo 1 - 14.000
           </button>
-          <button onclick="agregarDesayuno('Combo-2', 14000)">
+          <button onclick="agregarDesayuno('Combo-2', 10000)">
             Combo 2 - 10.000
           </button>
-          <button onclick="agregarDesayuno('Combo-3', 14000)">
+          <button onclick="agregarDesayuno('Combo-3', 8500)">
             Combo 3 - 8.500
           </button>
-          <button onclick="agregarDesayuno('Combo-4', 14000)">
+          <button onclick="agregarDesayuno('Combo-4', 11500)">
             Combo 4 - 11.500
           </button>
         </section>
@@ -56,76 +56,84 @@
         <form class="formulario-desayunos" id="form-pedidos">
           <div class="input-radio">
             <label for="">changua</label>
-            <input type="number" />
+            <input id="changua" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Caldo</label>
-            <input type="number" />
+            <input id="caldo" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Chocolate y Pan</label>
-            <input type="number" />
+            <input id="chocoPan" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Huevos Arroz</label>
-            <input type="number" />
+            <input id="huevosArroz" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Huevos al Gusto</label>
-            <input type="number" />
+            <input id="huevoGusto" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Tamal Especial</label>
-            <input type="number" />
+            <input id="TamalEspecial" type="number" />
           </div>
           <h3>Bebidas:</h3>
 
           <div class="input-radio">
             <label for="">cafe</label>
-            <input type="number" />
+            <input id="cafe" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Chocolate</label>
-            <input type="number" />
+            <input id="chocolate" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Perico</label>
-            <input type="number" />
+            <input id="perico" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Jugo Hit</label>
-            <input type="number" />
+            <input id="jugoHit" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Jugo Hit Grande</label>
-            <input type="number" />
+            <input id="jugoHitG" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Jugo natural agua </label>
-            <input type="number" />
+            <input id="jugoNatural" type="number" />
           </div>
           <div class="input-radio">
             <label for="">Jugo Natural Leche</label>
-            <input type="number" />
+            <input id="JNaruralLeche" type="number" />
           </div>
         </form>
 
         <dialog class="modal-desayunos" id="modalDesayunos">
-          <img
-            id="close-icon2"
-            class="close"
-            src="../imgs/remove.png"
-            alt="closedesayunos"
-          />
-          <h4>especificaciones</h4>
-          <textarea class="area-desayunos" name="" id=""></textarea>
+          <form id="formulario-desayunos" action="">
+            <img
+              id="close-icon2"
+              class="close"
+              src="../imgs/remove.png"
+              alt="closedesayunos"
+            />
+            <h4>especificaciones</h4>
+            <textarea
+              class="area-desayunos"
+              name=""
+              id="especificaciones-desayunos"
+            ></textarea>
 
-          <button class="enviarPedido" id="enviarPedido">Enviar Pedido</button>
+            <button class="enviarPedido" id="enviarPedido">
+              Enviar Pedido
+            </button>
+          </form>
         </dialog>
 
         <button class="enviarPedido" id="enviar-desatuno">Enviar Pedido</button>
 
-        <script src="/socket.io/socket.io.js"></script>
+        <!-- <script src="/socket.io/socket.io.js"></script> -->
         <script src="./scripts/desayunos.js"></script>
       </div>
     </main>
