@@ -1,49 +1,35 @@
-const contenedor = document.getElementById("containersComandas");
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarComandas();
+});
 
-const comandas = [];
+function mostrarComandas() {
+  let listaComandas = document.getElementById("lista-comandas");
+  if (!listaComandas) return;
 
-function NuevaComanda(numeroMesa, sopa, principio, jugo, ensalada, proteina) {
-  this.numeroMesa = numeroMesa;
-  this.sopa = sopa;
-  this.principio = principio;
-  this.jugo = jugo;
-  this.ensalada = ensalada;
-  this.proteina = proteina;
-  this.id = crypto.randomUUID();
-}
+  let pedidosGuardados = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-function agregarComanda(numeroMesa, sopa, principio, jugo, ensalada, proteina) {
-  const comanda = new NuevaComanda(
-    numeroMesa,
-    sopa,
-    principio,
-    jugo,
-    ensalada,
-    proteina
-  );
-  comandas.push(comanda);
-  actualizarComandas();
-}
+  listaComandas.innerHTML = "";
 
-function actualizarComandas() {
-  contenedor.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevas comandas
+  let totalFacturado = 0;
 
-  comandas.forEach((mesa) => {
-    const mesaDiv = document.createElement("div"); // Cambié el nombre para evitar conflictos
-    mesaDiv.classList.add("mesa-card");
+  pedidosGuardados.forEach((pedido, index) => {
+    let div = document.createElement("div");
+    div.classList.add("comanda");
+    div.innerHTML = `
+          <h3>Pedido ${index + 1}</h3>
+          <ul>
+              ${pedido.productos
+                .map((prod) => `<li>${prod.nombre} - ${prod.precio} COP</li>`)
+                .join("")}
+          </ul>
+          <p>Total: ${pedido.total} COP</p>
+      `;
 
-    mesaDiv.innerHTML = `
-        <h3>Mesa ${mesa.numeroMesa}</h3>
-        <p><strong>Sopa:</strong> ${mesa.sopa}</p>
-        <p><strong>Principio:</strong> ${mesa.principio}</p>
-        <p><strong>Jugo:</strong> ${mesa.jugo}</p>
-        <p><strong>Ensalada:</strong> ${mesa.ensalada}</p>
-        <p><strong>Proteína:</strong> ${mesa.proteina}</p>
-    `;
-
-    contenedor.appendChild(mesaDiv); // Ahora sí se agrega correctamente al DOM
+    totalFacturado += pedido.total;
+    listaComandas.appendChild(div);
   });
-}
 
-// Agregar una comanda para probar
-agregarComanda(1, "arroz", "frijol", "maracuyá", "no", "pollo");
+  let resumen = document.createElement("p");
+  resumen.innerHTML = `<strong>Total Facturado: ${totalFacturado} COP</strong>`;
+  listaComandas.appendChild(resumen);
+}

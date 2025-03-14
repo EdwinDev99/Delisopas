@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Birthstone&family=Shadows+Into+Light&display=swap"
       rel="stylesheet"
     />
-    <title>Delisopas</title>
+    <title>Almuerzos</title>
   </head>
   <body>
     <header class="header">
@@ -36,22 +36,24 @@
 
         <h2>Seleccionar Almuerzos</h2>
         <section class="buttons">
-          <button onclick="agregarAlmuerzo('Almuerzo Corriente', 10)">
+          <button onclick="agregarPedido('almuerzo', 'Almuerzo Corriente', 10)">
             Almuerzo Corriente - €10
           </button>
-          <button onclick="agregarAlmuerzo('Ejecutivo Varios ', 15)">
+          <button onclick="agregarPedido('almuerzo','Ejecutivo Varios ', 15)">
             Ejecutivo Varios- €15
           </button>
-          <button onclick="agregarAlmuerzo('Ejecutivo Sopa Especial', 15)">
+          <button
+            onclick="agregarPedido('almuerzo','Ejecutivo Sopa Especial', 15)"
+          >
             Ejecutivo Sopa Especial
           </button>
-          <button onclick="agregarAlmuerzo('Ejecutivo Churrasco', 15)">
+          <button onclick="agregarPedido('almuerzo','Ejecutivo Churrasco', 15)">
             Ejecutivo Churrasco
           </button>
-          <button onclick="agregarAlmuerzo('Sopa Pequena', 15)">
+          <button onclick="agregarPedido('almuerzo','Sopa Pequena', 15)">
             Sopa Pequena
           </button>
-          <button onclick="agregarAlmuerzo('Sopa Grande', 15)">
+          <button onclick="agregarPedido('almuerzo','Sopa Grande', 15)">
             Sopa Grande
           </button>
         </section>
@@ -85,7 +87,7 @@
         </dialog>
 
         <script src="/socket.io/socket.io.js"></script>
-        <script src="./scripts/almuerzo.js"></script>
+        <script src="./scripts/pedidos.js"></script>
       </div>
     </main>
   </body>
