@@ -1,35 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
-  mostrarComandas();
+const socket = io("http://localhost:3000");
+
+socket.on("actualizarPedidos", (pedidos) => {
+  mostrarPedidos(pedidos);
 });
 
-function mostrarComandas() {
-  let listaComandas = document.getElementById("lista-comandas");
-  if (!listaComandas) return;
+function mostrarPedidos(pedidos) {
+  const contenedor = document.getElementById("containersComandas");
+  contenedor.innerHTML = "";
 
-  let pedidosGuardados = JSON.parse(localStorage.getItem("pedidos")) || [];
+  pedidos.forEach((pedido) => {
+    const divPedido = document.createElement("div");
+    divPedido.classList.add("pedido");
 
-  listaComandas.innerHTML = "";
+    let productosHTML = "";
+    pedido.items.forEach((item) => {
+      productosHTML += `<p>${item.cantidad}x ${item.nombre} - $${
+        item.cantidad * item.precio
+      }</p>`;
+    });
 
-  let totalFacturado = 0;
+    divPedido.innerHTML = `
+      <h3>Pedido #${pedido.id}</h3>
+      ${productosHTML}
+      <p><strong>Total: $${pedido.total}</strong></p>
+      <button onclick="marcarComoPagado(${pedido.id})">Marcar como pagado</button>
+    `;
 
-  pedidosGuardados.forEach((pedido, index) => {
-    let div = document.createElement("div");
-    div.classList.add("comanda");
-    div.innerHTML = `
-          <h3>Pedido ${index + 1}</h3>
-          <ul>
-              ${pedido.productos
-                .map((prod) => `<li>${prod.nombre} - ${prod.precio} COP</li>`)
-                .join("")}
-          </ul>
-          <p>Total: ${pedido.total} COP</p>
-      `;
-
-    totalFacturado += pedido.total;
-    listaComandas.appendChild(div);
+    contenedor.appendChild(divPedido);
   });
+}
 
-  let resumen = document.createElement("p");
-  resumen.innerHTML = `<strong>Total Facturado: ${totalFacturado} COP</strong>`;
-  listaComandas.appendChild(resumen);
+function marcarComoPagado(idPedido) {
+  socket.emit("pedidoPagado", idPedido);
 }

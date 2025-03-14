@@ -74,10 +74,8 @@ function agregarPedido(tipo, nombre, precio, especificaciones = "") {
     resumenPedido[nombre].cantidad++;
   }
 
-  // Sumar el precio total
   precioTotal += precio;
 
-  // Actualizar el resumen
   actualizarResumen();
 }
 
@@ -109,7 +107,80 @@ function actualizarResumen() {
     }
   });
 
-  // Actualizar la UI
   totalProductos.textContent = `Productos: ${totalItems}`;
   totalPrecio.textContent = `Total: €${nuevoTotal}`;
 }
+
+const socket = io("http://localhost:3000");
+
+// Función para enviar un pedido al backend
+document.getElementById("enviar-desayuno").addEventListener("click", () => {
+  const mesaSeleccionada = document.getElementById("mesa").value;
+  let productosPedido = [];
+  let totalPedido = 0;
+
+  // Recorrer los productos seleccionados manualmente en la lista
+  for (let producto in resumenPedido) {
+    productosPedido.push({
+      nombre: producto,
+      cantidad: resumenPedido[producto].cantidad,
+      precio: resumenPedido[producto].precio,
+    });
+    totalPedido +=
+      resumenPedido[producto].cantidad * resumenPedido[producto].precio;
+  }
+
+  // Capturar productos de los inputs manuales
+  document.querySelectorAll(".input-radio input").forEach((input) => {
+    let cantidad = parseInt(input.value) || 0;
+    let nombre = input.id;
+
+    if (precios[nombre] && cantidad > 0) {
+      productosPedido.push({
+        nombre: nombre,
+        cantidad: cantidad,
+        precio: precios[nombre],
+      });
+      totalPedido += cantidad * precios[nombre];
+    }
+  });
+
+  // Verificar si hay productos seleccionados
+  if (productosPedido.length === 0) {
+    alert("No hay productos en el pedido.");
+    return;
+  }
+
+  // Estructura del pedido a enviar
+  const pedido = {
+    mesa: mesaSeleccionada,
+    productos: productosPedido,
+    total: totalPedido,
+  };
+
+  // Enviar el pedido al backend con socket.io
+  socket.emit("nuevoPedido", pedido);
+
+  // Limpiar la lista después de enviar
+  document.getElementById("lista-pedido").innerHTML = "";
+  resumenPedido = {};
+  precioTotal = 0;
+  actualizarResumen();
+
+  alert("Pedido enviado correctamente.");
+});
+
+// Cuando el backend actualiza los pedidos
+socket.on("actualizarPedidos", (pedidos) => {
+  console.log("Pedidos actualizados:", pedidos);
+});
+
+// Marcar un pedido como pagado
+function marcarComoPagado(idPedido) {
+  socket.emit("pedidoPagado", idPedido);
+}
+
+// Escuchar el resumen de ventas
+socket.on("actualizarResumen", (resumen) => {
+  console.log("Resumen de ventas:", resumen);
+});
